@@ -12,7 +12,14 @@ public interface HotelRepository extends JpaRepository<Hotel, Long>{
 	
 //	@Query("select h from Hotel h where "
 //			+ "lower(h.location) like lower(concat('%',:location,'%')) and  h.available=true")
-	List<Hotel> findByLocation(String location);	
-	
+//	List<Hotel> findByLocation(String location);
+
+
+	//ContainingIgnoreCase is actually an inbuilt feature of Spring Data JPA.
+//	containingIgnoreCase== SELECT * FROM hotel
+//	WHERE LOWER(location) LIKE LOWER('%value%');
+
+	List<Hotel> findByLocationContainingIgnoreCase(String location);
+
 	Optional<Hotel> findByName(String name);
 }

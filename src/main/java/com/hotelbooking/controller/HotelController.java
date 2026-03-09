@@ -40,7 +40,7 @@ public class HotelController {
 	private JwtUtil jwtUtil; // Add JWT utility to extract email
 	
 	
-	@PostMapping
+	@PostMapping("/create")
 	@Operation(summary = "hotels can be created only by the OWNER")
 	public ResponseEntity<?> createHotel(
 			@RequestBody HotelRequestDTO hotelRequestDTO,
@@ -65,18 +65,20 @@ public class HotelController {
 	}
 	
 	@GetMapping
-	@Operation(summary = "get all hotels can checked by owner only")
+	@Operation(summary = "get all hotels can checked by Admin only, all hotels from all owners")
 	public List<Hotel> getAllHotels(){
 		return hotelService.getHotels();
 	}
 
 	 // 🔹 Search Hotels (Role-Based)
     @GetMapping("/search")
+	@Operation(summary = "Admin can get hotels from all owners by searched location")
     public ResponseEntity<List<Hotel>> searchHotels(
             @RequestHeader("Authorization") String token,
-            @RequestParam String location, 
-    			@RequestParam LocalDate checkIn,
-    			@RequestParam LocalDate checkOut){
+            @RequestParam String location
+//    			@RequestParam LocalDate checkIn,
+//    			@RequestParam LocalDate checkOut
+ 			){
 
         // Extract user from token
         String email = jwtUtil.extractUsername(token.substring(7));
@@ -84,7 +86,7 @@ public class HotelController {
                 .orElseThrow(() -> new RuntimeException("User not found with email: " + email));
 
         // Perform role-based search
-        List<Hotel> hotels = hotelService.searchHotels(location, checkIn,checkOut);
+        List<Hotel> hotels = hotelService.searchHotels(location);
 
         return ResponseEntity.ok(hotels);
     }

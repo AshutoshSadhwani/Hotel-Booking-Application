@@ -32,9 +32,14 @@ public class SpringSecurity {
 								"/v3/api-docs/**",
 								"/swagger-ui.html"
 						).permitAll()
-				.requestMatchers("/auth/**").permitAll()
-				.requestMatchers("/bookings/**").hasRole("USER")
-				.requestMatchers("/hotels/**").hasRole("OWNER")
+						.requestMatchers("/auth/**").permitAll()
+
+						.requestMatchers("/hotels/search").hasRole("ADMIN")
+						.requestMatchers("/hotels").hasRole("ADMIN")
+
+						.requestMatchers("/hotels/create").hasRole("OWNER")
+
+						.requestMatchers("/bookings/**").hasRole("USER")
 				.anyRequest().authenticated()
 				)
         .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // No session

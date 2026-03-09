@@ -37,23 +37,24 @@ public class HotelService {
 	        hotel.setOwner(owner);
 	        return hotelRepository.save(hotel);
 	    }
-	//get
+	//get : only owner can get all hotels
 	public List<Hotel> getHotels(){
 		
 		return hotelRepository.findAll();
 	}
-	
-	public List<Hotel> searchHotels(String location,LocalDate checkIn,LocalDate checkOut) {
+
+	// search:get
+	public List<Hotel> searchHotels(String location) {
 	    
-		if(!checkOut.isAfter(checkIn)) {
-			throw new RuntimeException("Checkout must be after checkin");
-		}
-		List<Hotel> hotels = hotelRepository.findByLocation(location)
-				.stream()
-				.filter(hotel->bookingRepository
-				.findByHotelIdAndCheckInBeforeAndCheckOutAfter(hotel.getId(), checkOut, checkIn)
-				.stream().noneMatch(booking->!"CANCELLED".equalsIgnoreCase(booking.getStatus())))
-			.toList();
+//		if(!checkOut.isAfter(checkIn)) {
+//			throw new RuntimeException("Checkout must be after checkin");
+//		}
+		List<Hotel> hotels = hotelRepository.findByLocationContainingIgnoreCase(location);
+//				.stream()
+//				.filter(hotel->bookingRepository
+//				.findByHotelIdAndCheckInBeforeAndCheckOutAfter(hotel.getId(), checkOut, checkIn)
+//				.stream().noneMatch(booking->!"CANCELLED".equalsIgnoreCase(booking.getStatus())))
+//			.toList();
 
 		
 	    if (hotels.isEmpty()) {
