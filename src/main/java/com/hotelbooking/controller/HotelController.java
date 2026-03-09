@@ -3,6 +3,9 @@ package com.hotelbooking.controller;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.hotelbooking.entity.HotelRequestDTO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +29,7 @@ import com.hotelbooking.service.HotelService;
 
 @RestController
 @RequestMapping("/hotels")
+@Tag(name = "Hotel Apis",description = "add,get and delete hotels")
 public class HotelController {
 	
 	@Autowired
@@ -37,9 +41,10 @@ public class HotelController {
 	
 	
 	@PostMapping
+	@Operation(summary = "hotels can be created only by the OWNER")
 	public ResponseEntity<?> createHotel(
-	        @RequestBody Hotel hotel,
-	        @RequestHeader("Authorization") String token
+			@RequestBody HotelRequestDTO hotelRequestDTO,
+			@RequestHeader("Authorization") String token
 	) {
 	    try {
 	    	
@@ -51,7 +56,7 @@ public class HotelController {
 	                .orElseThrow(() -> new RuntimeException("User not found with email: " + email));
 
 	        // Save hotel
-	        Hotel savedHotel = hotelService.createHotel(hotel, owner);
+	        Hotel savedHotel = hotelService.createHotel(hotelRequestDTO, owner);
 
 	        return ResponseEntity.status(HttpStatus.CREATED).body("Hotel is created successfully");
 	    } catch (RuntimeException e) {
@@ -60,6 +65,7 @@ public class HotelController {
 	}
 	
 	@GetMapping
+	@Operation(summary = "get all hotels can checked by owner only")
 	public List<Hotel> getAllHotels(){
 		return hotelService.getHotels();
 	}

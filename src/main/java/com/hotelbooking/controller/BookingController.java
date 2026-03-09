@@ -3,6 +3,7 @@ package com.hotelbooking.controller;
 import java.time.LocalDate;
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +20,7 @@ import com.hotelbooking.service.BookingService;
 
 @RestController
 @RequestMapping("/bookings")
+@Tag(name = "Booking Apis",description = "book hotels,get the booking,delete bookings")
 public class BookingController {
 
 	@Autowired

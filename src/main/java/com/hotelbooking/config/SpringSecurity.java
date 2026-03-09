@@ -26,6 +26,12 @@ public class SpringSecurity {
 		http
 		.csrf(csrf -> csrf.disable() )
 		.authorizeHttpRequests(auth -> auth
+						// Allow Swagger
+						.requestMatchers(
+								"/swagger-ui/**",
+								"/v3/api-docs/**",
+								"/swagger-ui.html"
+						).permitAll()
 				.requestMatchers("/auth/**").permitAll()
 				.requestMatchers("/bookings/**").hasRole("USER")
 				.requestMatchers("/hotels/**").hasRole("OWNER")
