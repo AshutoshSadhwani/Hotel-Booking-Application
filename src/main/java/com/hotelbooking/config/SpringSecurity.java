@@ -38,6 +38,7 @@ public class SpringSecurity {
 						.requestMatchers("/hotels").hasRole("ADMIN")
 
 						.requestMatchers("/hotels/create").hasRole("OWNER")
+						.requestMatchers("/hotels/{hotelId}").hasRole("OWNER")
 
 						.requestMatchers("/bookings/**").hasRole("USER")
 				.anyRequest().authenticated()

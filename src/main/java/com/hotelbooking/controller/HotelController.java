@@ -113,6 +113,7 @@ public class HotelController {
         hotelService.deleteHotel(hotelId, user);
 
         return ResponseEntity.ok("Hotel deleted successfully!");
+
     }	
 	
 
