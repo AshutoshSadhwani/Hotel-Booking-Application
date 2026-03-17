@@ -26,8 +26,10 @@ public class SwaggerConfig {
                 new Info().title("My hotelbooking APIs")
                         .description("By Ashutosh")
                 )
-                .servers((List.of(new Server().url("http://localhost:8080").description("local"),
-                        new Server().url("http://localhost:8081").description("live"))))
+                 .servers(List.of(
+                new Server().url("https://hotel-booking-application-3qvj.onrender.com").description("production"),
+                new Server().url("http://localhost:8080").description("local")
+))
                 .tags(Arrays.asList(
                         new Tag().name("Login/signup Apis")
                 ))
