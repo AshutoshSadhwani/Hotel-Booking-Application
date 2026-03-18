@@ -6,24 +6,24 @@ The Hotel Booking Application is a backend system developed using Spring Boot th
 ## Features
 
 ### 1. User Management
--Secure authentication using JWT (JSON Web Tokens)
--Role-based access control for:
--User
-  -Search hotels
-  -Book rooms
-  -View & cancel their own bookings
--Owner
-  -Create and manage their hotel listings
--Admin
-  -View and manage all hotel listings
-  -Cannot perform bookings (restricted intentionally)
+- Secure authentication using JWT (JSON Web Tokens)
+- Role-based access control for:
+- User
+  - Search hotels
+  - Book rooms
+  - View & cancel their own bookings
+- Owner
+  - Create and manage their hotel listings
+- Admin
+  - View and manage all hotel listings
+  - Cannot perform bookings (restricted intentionally)
 
 ### 2. Hotel Room Listings
--Owners can:
-  -Create new hotel room listings
-  -Update room details (price, availability, etc.)
-  -Delete their listings
-  -Each listing contains structured data such as:
+- Owners can:
+  - Create new hotel room listings
+  - Update room details (price, availability, etc.)
+  - Delete their listings
+  - Each listing contains structured data such as:
       Price
       Location
       Availability status
@@ -32,20 +32,20 @@ The Hotel Booking Application is a backend system developed using Spring Boot th
 - Users can search for available hotel rooms based on **check-in and check-out dates**.
 
 ### 4. . Booking Management (Core Feature)
--Users can reserve hotel rooms through secure booking APIs
--System ensures:
+- Users can reserve hotel rooms through secure booking APIs
+- System ensures:
 
-  -✅ No double booking using availability checks
-  -✅ Booking validation before confirmation
+  - ✅ No double booking using availability checks
+  - ✅ Booking validation before confirmation
 
--Users can:
-  -View their bookings
-  -Cancel their own bookings
+- Users can:
+  - View their bookings
+  - Cancel their own bookings
 
--⚠️ Security Design Decision:
-  -Booking APIs are restricted only to users
-  -Owners and Admins cannot create or manipulate bookings
-  -This prevents potential booking fraud or misuse
+- ⚠️ Security Design Decision:
+  - Booking APIs are restricted only to users
+  - Owners and Admins cannot create or manipulate bookings
+  - This prevents potential booking fraud or misuse
 
 ## Technologies Used
 
